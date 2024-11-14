@@ -1,32 +1,49 @@
-import { useForm } from "react-hook-form"
-import { yupSchema } from "./yupSchema"
+import { useForm } from "react-hook-form";
+import { yupSchema } from "./yupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "styled-components";
-
+import { useState } from "react";
 
 type FormValues = {
   email: string;
   password: string;
   verifyPassword: string;
-}
+};
 export default function LoginPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({resolver: yupResolver(yupSchema)})
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({ resolver: yupResolver(yupSchema) });
+  const [isLogin, setIsLogin] = useState(false);
 
-  const onSubmit = (data : FormValues) => console.log(data) 
+  const onSubmit = (data: FormValues) => console.log(data);
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
       <input {...register("email")} placeholder="email" />
       {errors.email && <p>{errors.email.message}</p>}
-      <input {...register("password")} placeholder="password" />
+      <input {...register("password")} placeholder="mot de passe" />
       {errors.password && <p>{errors.password.message}</p>}
-      <input {...register("verifyPassword")} placeholder="verifyPassword" />
-      {errors.verifyPassword && <p>{errors.verifyPassword.message}</p>}
-
-      <button type="submit">Submit</button>
+      {!isLogin && (
+        <>
+          <input
+            {...register("verifyPassword")}
+            placeholder="verifier le mot de passe"
+          />
+          {errors.verifyPassword && <p>{errors.verifyPassword.message}</p>}
+        </>
+      )}
+      <button type="submit">s'inscrire</button>
+      {!isLogin && (
+        <span className="link">
+          Vous avez déjà un compte ?{" "}
+          <button onClick={() => setIsLogin(true)}>Se connecter</button>
+        </span>
+      )}
     </StyledForm>
-  )
+  );
 }
-
 
 const StyledForm = styled.form`
   display: flex;
@@ -71,6 +88,22 @@ const StyledForm = styled.form`
 
     &:hover {
       background-color: #0056b3;
+    }
+  }
+  .link {
+    margin-top: 10px;
+    button {
+      background: none;
+      border: none;
+      color: blue;
+      cursor: pointer;
+      padding: 0;
+      font: inherit;
+
+      &:hover {
+        text-decoration: underline;
+        color: #730096;
+      }
     }
   }
 `;
