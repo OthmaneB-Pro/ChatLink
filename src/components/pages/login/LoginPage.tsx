@@ -3,6 +3,7 @@ import { yupSchema } from "./yupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
   email: string;
@@ -10,6 +11,7 @@ type FormValues = {
   verifyPassword: string;
 };
 export default function LoginPage() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,24 +19,32 @@ export default function LoginPage() {
   } = useForm<FormValues>({ resolver: yupResolver(yupSchema) });
   const [isLogin, setIsLogin] = useState(false);
 
-  const onSubmit = (data: FormValues) => console.log(data);
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+    navigate("/menu");
+  };
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
       <input {...register("email")} placeholder="email" />
       {errors.email && <p>{errors.email.message}</p>}
-      <input {...register("password")} placeholder="mot de passe" />
+      <input
+        {...register("password")}
+        type="password"
+        placeholder="mot de passe"
+      />
       {errors.password && <p>{errors.password.message}</p>}
       {!isLogin && (
         <>
           <input
             {...register("verifyPassword")}
             placeholder="verifier le mot de passe"
+            type="password"
           />
           {errors.verifyPassword && <p>{errors.verifyPassword.message}</p>}
         </>
       )}
-      <button type="submit">s'inscrire</button>
+      <button type="submit">{isLogin ? "Se connecter" : "S'inscrire"}</button>
       {!isLogin && (
         <span className="link">
           Vous avez déjà un compte ?{" "}
