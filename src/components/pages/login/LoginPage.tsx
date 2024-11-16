@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../../store/useUserStore";
 
 type FormValues = {
   email: string;
@@ -12,6 +13,7 @@ type FormValues = {
 };
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { setUser } = useUserStore()
   const {
     register,
     handleSubmit,
@@ -21,6 +23,7 @@ export default function LoginPage() {
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
+    setUser({ username: data.email, password: data.password});
     navigate("/menu");
   };
   return (
