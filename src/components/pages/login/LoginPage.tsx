@@ -7,13 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../../store/useUserStore";
 
 type FormValues = {
+  username: string;
   email: string;
   password: string;
   verifyPassword: string;
 };
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { setUser } = useUserStore()
+  const { setUser } = useUserStore();
   const {
     register,
     handleSubmit,
@@ -23,12 +24,14 @@ export default function LoginPage() {
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
-    setUser({ username: data.email, password: data.password});
+    setUser({ username: data.username, password: data.password });
     navigate("/menu");
   };
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
+      <input {...register("username")} placeholder="nom" />
+      {errors.username && <p>{errors.username.message}</p>}
       <input {...register("email")} placeholder="email" />
       {errors.email && <p>{errors.email.message}</p>}
       <input
