@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import Contact from "./contact/Contact";
+import MainMessage from "./message/MainMessage";
 
 export default function Messaging() {
   return (
     <MessagingStyled>
       <Contact/>
-      <div className="messages">Bonjour</div>
+      <MainMessage/>
     </MessagingStyled>
   );
 }
