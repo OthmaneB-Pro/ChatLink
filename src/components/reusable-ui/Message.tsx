@@ -3,12 +3,14 @@ import styled from "styled-components";
 export default function Message({
   label,
   timestamp,
+  onContextMenu,
 }: {
   label: string;
   timestamp: string;
+  onContextMenu : (event : React.MouseEvent) => void;
 }) {
   return (
-    <MessageStyled>
+    <MessageStyled onContextMenu={onContextMenu}>
       <p className="text">{label}</p>
       <p className="time">{timestamp}</p>
     </MessageStyled>
@@ -18,7 +20,6 @@ export default function Message({
 const MessageStyled = styled.div`
   margin: 10px;
   display: flex;
-  border: 1px solid;
   border-radius: 5px;
   max-width: 450px;
   background: white;
@@ -38,7 +39,7 @@ const MessageStyled = styled.div`
     margin-left: auto;
     margin-top: auto;
     color: #d0d0d0;
-    background: #007bff;
+    background: #469bf6;
     padding: 5px;
     border-radius : 5px;
   }
