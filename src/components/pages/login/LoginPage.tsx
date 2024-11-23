@@ -25,7 +25,7 @@ export default function LoginPage() {
   const onSubmit = (data: FormValues) => {
     console.log(data);
     setUser({ username: data.username, password: data.password });
-    navigate("/menu");
+    navigate("/messaging");
   };
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
