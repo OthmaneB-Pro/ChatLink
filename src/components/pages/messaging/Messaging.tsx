@@ -15,8 +15,4 @@ const MessagingStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
   height: 100vh;
-
-  .contact {
-    background-color: white;
-  }
 `;
