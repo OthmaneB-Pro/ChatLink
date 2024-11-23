@@ -19,20 +19,4 @@ const MessagingStyled = styled.div`
   .contact {
     background-color: white;
   }
-  .messages {
-    background-color: #dcedf5;
-    display: flex;
-    flex-direction: column;
-
-    form {
-      margin-top: auto;
-      input {
-        padding: 15px;
-        width: 50vw;
-      }
-      button {
-        padding: 15px;
-      }
-    }
-  }
 `;

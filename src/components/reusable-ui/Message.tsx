@@ -4,13 +4,15 @@ export default function Message({
   label,
   timestamp,
   onContextMenu,
+  className,
 }: {
   label: string;
   timestamp: string;
+  className : string;
   onContextMenu : (event : React.MouseEvent) => void;
 }) {
   return (
-    <MessageStyled onContextMenu={onContextMenu}>
+    <MessageStyled onContextMenu={onContextMenu} className={className}>
       <p className="text">{label}</p>
       <p className="time">{timestamp}</p>
     </MessageStyled>
@@ -43,4 +45,6 @@ const MessageStyled = styled.div`
     padding: 5px;
     border-radius : 5px;
   }
+
+  
 `;

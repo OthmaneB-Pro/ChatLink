@@ -2,15 +2,15 @@ import { create } from "zustand";
 
 type MessagingType = {
   text: string;
-  sender: string;
+  sender: "Moi" | "Lui";
   timestamp: string;
   
   setUser: (data: Partial<MessagingType>) => void;
 };
 
-export const useUserStore = create<MessagingType>((set) => ({
+export const useMessagingStore = create<MessagingType>((set) => ({
   text: "",
-  sender: "",
+  sender: "Moi",
   timestamp: "",
   setUser: (data) => set((state) => ({ ...state, ...data })),
 }));
