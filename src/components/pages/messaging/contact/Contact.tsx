@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useUserStore } from "../../../../store/useUserStore";
 import { useState } from "react";
+import ContactPage from '../../../reusable-ui/Contact';
 
 export default function Contact() {
   const { username, picture } = useUserStore();
@@ -14,8 +15,10 @@ export default function Contact() {
         <h4>{username}</h4>
       </div>
 
-      {contacts.length !== 0
-        ? "Voici la liste des contacts"
+      {contacts.length === 0
+        ? <>
+          <ContactPage src="daz" alt="alt" username="Othmane" phone="07 68 77 70 67" />
+        </>
         : "Aucun contact pour le moment"}
     </ContactStyled>
   );
