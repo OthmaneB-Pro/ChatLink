@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useUserStore } from "../../../../store/useUserStore";
 import { useState } from "react";
-import ContactPage from '../../../reusable-ui/Contact';
+import ContactPage from "../../../reusable-ui/Contact";
+import { Data_contact } from "../../../../data/fakeContact";
 
 export default function Contact() {
   const { username, picture } = useUserStore();
@@ -15,11 +16,21 @@ export default function Contact() {
         <h4>{username}</h4>
       </div>
 
-      {contacts.length === 0
-        ? <>
-          <ContactPage src="daz" alt="alt" username="Othmane" phone="07 68 77 70 67" />
+      {contacts.length === 0 ? (
+        <>
+          {Data_contact.map((contact) => (
+            <ContactPage
+              key={contact.id}
+              src={contact.src}
+              alt="alt"
+              username={contact.username}
+              phone={contact.phone}
+            />
+          ))}
         </>
-        : "Aucun contact pour le moment"}
+      ) : (
+        "Aucun contact pour le moment"
+      )}
     </ContactStyled>
   );
 }
