@@ -23,10 +23,15 @@ export default function ContactPage({
 }
 
 const ContactStyled = styled.div`
+  margin: 10px;
   background: white;
   display: flex;
+  align-items: center;
   gap: 20px;
+  border: 1px solid black;
+  cursor: pointer;
   img {
+    margin-left: 10px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
