@@ -79,12 +79,22 @@ const MainMessageStyled = styled.div`
 
   form {
     margin-top: auto;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
     input {
       padding: 15px;
       width: 50vw;
+      border-radius: 25px;
+      border: none;
     }
     button {
       padding: 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 25px;
     }
   }
 
