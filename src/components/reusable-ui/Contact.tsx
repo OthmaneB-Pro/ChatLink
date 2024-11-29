@@ -29,6 +29,7 @@ const ContactStyled = styled.div`
   align-items: center;
   gap: 20px;
   border: 1px solid black;
+  border-radius: 5px;
   cursor: pointer;
   img {
     margin-left: 10px;

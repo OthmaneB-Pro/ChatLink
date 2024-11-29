@@ -13,7 +13,7 @@ export default function Contact() {
       <h5>ChatLink</h5>
       <div className="profil">
         <img src={picture} alt="avatar" />
-        <h4>{username}</h4>
+        <h4>Chats</h4>
       </div>
 
       {contacts.length === 0 ? (
@@ -36,15 +36,16 @@ export default function Contact() {
 }
 
 const ContactStyled = styled.div`
-  background: #d1d1d1;
+  background: #fff;
   .profil {
     display: flex;
+    align-items: center;
     gap: 20px;
 
     img {
       background: white;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: 1px solid black;
     }

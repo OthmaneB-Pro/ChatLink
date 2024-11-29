@@ -47,6 +47,10 @@ export default function MainMessage() {
           </button>
         </form>
       )}
+
+      <div className="profil">
+        <h2>Conversation de {sender}</h2>
+      </div>
       {message.map((message, index) => (
         <Message
           label={message.text}
@@ -76,6 +80,16 @@ const MainMessageStyled = styled.div`
   background-color: #dcedf5;
   display: flex;
   flex-direction: column;
+
+  .profil {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+
+    h2{
+      font-weight: 400;
+    }
+  }
 
   form {
     margin-top: auto;
