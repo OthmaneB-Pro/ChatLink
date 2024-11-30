@@ -1,20 +1,16 @@
 import styled from "styled-components";
-import { useUserStore } from "../../../../store/useUserStore";
 import { useState } from "react";
 import ContactPage from "../../../reusable-ui/Contact";
 import { Data_contact } from "../../../../data/fakeContact";
+import ProfilMessage from "../message/ProfilMessage";
 
 export default function Contact() {
-  const { username, picture } = useUserStore();
   const [contacts, setContacts] = useState<string[]>([]);
 
   return (
     <ContactStyled>
       <h5>ChatLink</h5>
-      <div className="profil">
-        <img src={picture} alt="avatar" />
-        <h4>Chats</h4>
-      </div>
+      <ProfilMessage/>
 
       {contacts.length === 0 ? (
         <>
@@ -48,6 +44,7 @@ const ContactStyled = styled.div`
       height: 40px;
       border-radius: 50%;
       border: 1px solid black;
+      cursor: pointer;
     }
   }
 `;

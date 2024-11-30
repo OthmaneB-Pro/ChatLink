@@ -49,7 +49,7 @@ export default function MainMessage() {
       )}
 
       <div className="profil">
-        <h2>Conversation de {sender}</h2>
+        <h2>Conversation de <span>{sender}</span></h2>
       </div>
       {message.map((message, index) => (
         <Message
@@ -86,8 +86,11 @@ const MainMessageStyled = styled.div`
     padding: 10px;
     justify-content: center;
 
-    h2{
+    h2 {
       font-weight: 400;
+    }
+    span{
+      text-decoration: underline;
     }
   }
 
@@ -109,6 +112,11 @@ const MainMessageStyled = styled.div`
       color: white;
       border: none;
       border-radius: 25px;
+
+      &:hover {
+        background: #0069d9;
+        cursor: pointer;
+      }
     }
   }
 

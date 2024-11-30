@@ -22,10 +22,10 @@ export default function Message({
 const MessageStyled = styled.div`
   margin: 10px;
   display: flex;
-  border-radius: 5px;
+  border-radius: 25px;
   max-width: 450px;
   background: white;
-  padding: 5px;
+  padding: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 
   .text {
