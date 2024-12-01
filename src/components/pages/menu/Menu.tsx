@@ -1,10 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserStore } from "../../../store/useUserStore";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function Menu() {
   const { username, picture, status, setUser } = useUserStore();
+  const navigate = useNavigate()
   const [isModify, setIsModify] = useState(false);
+
+  useEffect(() => {
+    const savedUsername = localStorage.getItem("username");
+    const savedPicture = localStorage.getItem("picture");
+    const savedStatus = localStorage.getItem("status");
+
+    if (savedUsername || savedPicture || savedStatus) {
+      setUser({
+        username: savedUsername || username,
+        picture: savedPicture || picture,
+      });
+    }
+  }, [setUser, username, picture, status]);
+  const handleSave = () => {
+    localStorage.setItem("username", username);
+    localStorage.setItem("picture", picture);
+    setIsModify(false);
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -19,6 +39,7 @@ export default function Menu() {
         <Status>{status}</Status>
       </ProfileCard>
       <EditButton onClick={() => setIsModify(true)}>Modifier mon profil</EditButton>
+      <button onClick={() => navigate("/messaging")}>Annuler</button>
       {isModify && (
         <EditForm>
           <Input onChange={handleChange} value={username} name="username" placeholder="Nom d'utilisateur" />
@@ -34,10 +55,11 @@ export default function Menu() {
             <option value="Disponible">Disponible</option>
             <option value="Indisponible">Indisponible</option>
           </Select>
-          <SubmitButton type="button" onClick={() => setIsModify(false)}>
+          <SubmitButton type="button" onClick={handleSave}>
             Valider les modifications
           </SubmitButton>
         </EditForm>
+        
       )}
     </Container>
   );
@@ -51,6 +73,7 @@ const Container = styled.div`
 `;
 
 const ProfileCard = styled.div`
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,6 +114,7 @@ const EditButton = styled.button`
     background-color: #0056b3;
   }
 `;
+
 
 const EditForm = styled.form`
   display: flex;
