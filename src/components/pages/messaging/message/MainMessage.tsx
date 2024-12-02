@@ -1,16 +1,45 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Message from "../../../reusable-ui/Message";
 import { getCurrentTime } from "../../../../utils/getCurrentTime";
 import { useMessagingStore } from "../../../../store/useMessagingStore";
 import styled from "styled-components";
 
 export default function MainMessage() {
-  const [message, setMessage] = useState<{ text: string; timestamp: string }[]>(
-    []
-  );
+  const [message, setMessage] = useState<
+    { text: string; timestamp: string; fileUrl?: string }[]
+  >([]);
   const [currentMessage, setCurrentMessage] = useState("");
   const [modify, setModify] = useState(false);
   const { sender } = useMessagingStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  const handleSendFileToChat = () => {
+    if (!selectedFile) {
+      alert("Aucun fichier sélectionné !");
+      return;
+    }
+
+    const timestamp = getCurrentTime();
+    const newMessage = {
+      text: selectedFile.name, // Nom du fichier
+      timestamp,
+      fileUrl: URL.createObjectURL(selectedFile), // URL temporaire pour prévisualisation
+    };
+
+    setMessage([...message, newMessage]);
+    setSelectedFile(null); // Réinitialise le fichier sélectionné
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,6 +51,7 @@ export default function MainMessage() {
     setMessage([...message, newMessage]);
     setCurrentMessage("");
   };
+
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
     const result = window.confirm("Voulez-vous modifier ce message ?");
@@ -49,11 +79,21 @@ export default function MainMessage() {
       )}
 
       <div className="profil">
-        <h2>Conversation de <span>{sender}</span></h2>
+        <h2>
+          Conversation de <span>{sender}</span>
+        </h2>
       </div>
       {message.map((message, index) => (
         <Message
-          label={message.text}
+          label={
+            message.fileUrl ? (
+              <a href={message.fileUrl} target="_blank" rel="noopener noreferrer">
+                {message.text} (Fichier)
+              </a>
+            ) : (
+              message.text
+            )
+          }
           key={index}
           timestamp={message.timestamp}
           className={sender === "Moi" ? "sent" : "received"}
@@ -62,6 +102,20 @@ export default function MainMessage() {
       ))}
 
       <form onSubmit={handleSubmit}>
+        <button type="button" onClick={handleButtonClick}>
+          Choisir un fichier
+        </button>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: "none" }}
+        />
+        {selectedFile && (
+          <button type="button" onClick={handleSendFileToChat}>
+            Envoyer le fichier
+          </button>
+        )}
         <input
           type="text"
           placeholder="Entrez votre message"
@@ -70,7 +124,7 @@ export default function MainMessage() {
             setCurrentMessage(event.target.value);
           }}
         />
-        <button type="submit">OK</button>
+        <button type="submit">Envoyer</button>
       </form>
     </MainMessageStyled>
   );
@@ -89,7 +143,7 @@ const MainMessageStyled = styled.div`
     h2 {
       font-weight: 400;
     }
-    span{
+    span {
       text-decoration: underline;
     }
   }

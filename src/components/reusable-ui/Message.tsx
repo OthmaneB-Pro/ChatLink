@@ -6,7 +6,7 @@ export default function Message({
   onContextMenu,
   className,
 }: {
-  label: string;
+  label: React.ReactNode;
   timestamp: string;
   className : string;
   onContextMenu : (event : React.MouseEvent) => void;
