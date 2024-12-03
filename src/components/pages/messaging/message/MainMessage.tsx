@@ -32,13 +32,13 @@ export default function MainMessage() {
 
     const timestamp = getCurrentTime();
     const newMessage = {
-      text: selectedFile.name, // Nom du fichier
+      text: selectedFile.name,
       timestamp,
-      fileUrl: URL.createObjectURL(selectedFile), // URL temporaire pour prévisualisation
+      fileUrl: URL.createObjectURL(selectedFile),
     };
 
     setMessage([...message, newMessage]);
-    setSelectedFile(null); // Réinitialise le fichier sélectionné
+    setSelectedFile(null);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -87,7 +87,11 @@ export default function MainMessage() {
         <Message
           label={
             message.fileUrl ? (
-              <a href={message.fileUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                href={message.fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {message.text} (Fichier)
               </a>
             ) : (

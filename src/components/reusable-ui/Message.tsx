@@ -8,8 +8,8 @@ export default function Message({
 }: {
   label: React.ReactNode;
   timestamp: string;
-  className : string;
-  onContextMenu : (event : React.MouseEvent) => void;
+  className: string;
+  onContextMenu: (event: React.MouseEvent) => void;
 }) {
   return (
     <MessageStyled onContextMenu={onContextMenu} className={className}>
@@ -43,8 +43,6 @@ const MessageStyled = styled.div`
     color: #d0d0d0;
     background: #469bf6;
     padding: 5px;
-    border-radius : 5px;
+    border-radius: 5px;
   }
-
-  
 `;
