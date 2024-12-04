@@ -39,7 +39,7 @@ export default function Menu() {
         <Status>{status}</Status>
       </ProfileCard>
       <EditButton onClick={() => setIsModify(true)}>Modifier mon profil</EditButton>
-      <button onClick={() => navigate("/messaging")}>Annuler</button>
+      <CancelButton onClick={() => navigate("/messaging")}>Annuler</CancelButton>
       {isModify && (
         <EditForm>
           <Input onChange={handleChange} value={username} name="username" placeholder="Nom d'utilisateur" />
@@ -69,7 +69,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px;
+  background-color: #f5f5f5;
+  height: 94vh;
 `;
 
 const ProfileCard = styled.div`
@@ -102,6 +105,7 @@ const Status = styled.p`
 
 const EditButton = styled.button`
   padding: 10px 20px;
+  margin-bottom: 20px;
   font-size: 16px;
   color: #fff;
   background-color: #007bff;
@@ -149,13 +153,29 @@ const SubmitButton = styled.button`
   padding: 10px;
   font-size: 16px;
   color: #fff;
-  background-color: #28a745;
+  background-color: #007bff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #218838;
+    background-color: #0056b3;
   }
 `;
+
+const CancelButton = styled.button`
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #d40000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #b30000;
+  }
+`
