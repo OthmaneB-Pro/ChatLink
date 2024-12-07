@@ -3,13 +3,14 @@ import { useState } from "react";
 import ContactPage from "../../../reusable-ui/Contact";
 import { Data_contact } from "../../../../data/fakeContact";
 import ProfilMessage from "../message/ProfilMessage";
+import TitleContact from "./TitleContact";
 
 export default function Contact() {
   const [contacts, setContacts] = useState<string[]>([]);
 
   return (
     <ContactStyled>
-      <h5>ChatLink</h5>
+      <TitleContact/>
       <ProfilMessage/>
 
       {contacts.length === 0 ? (

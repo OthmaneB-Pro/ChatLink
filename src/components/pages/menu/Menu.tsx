@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUserStore } from "../../../store/useUserStore";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Input from "../../reusable-ui/Input";
 
 export default function Menu() {
   const { username, picture, status, setUser } = useUserStore();
@@ -125,20 +126,6 @@ const EditForm = styled.form`
   flex-direction: column;
   width: 100%;
   max-width: 300px;
-`;
-
-const Input = styled.input`
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
-
-  &:focus {
-    border-color: #007bff;
-  }
 `;
 
 const Select = styled.select`

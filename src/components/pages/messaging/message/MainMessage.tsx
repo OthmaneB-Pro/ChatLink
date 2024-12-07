@@ -3,6 +3,8 @@ import Message from "../../../reusable-ui/Message";
 import { getCurrentTime } from "../../../../utils/getCurrentTime";
 import { useMessagingStore } from "../../../../store/useMessagingStore";
 import styled from "styled-components";
+import Button from "../../../reusable-ui/Button";
+import MessageProfil from "./MessageProfil";
 
 export default function MainMessage() {
   const [message, setMessage] = useState<
@@ -72,17 +74,11 @@ export default function MainMessage() {
               setCurrentMessage(event.target.value);
             }}
           />
-          <button type="submit" onClick={() => setModify(false)}>
-            OK
-          </button>
+          <Button type="submit" onClick={() => setModify(false)} label="OK" />
         </form>
       )}
 
-      <div className="profil">
-        <h2>
-          Conversation de <span>{sender}</span>
-        </h2>
-      </div>
+      <MessageProfil sender={sender} />
       {message.map((message, index) => (
         <Message
           label={
@@ -106,9 +102,12 @@ export default function MainMessage() {
       ))}
 
       <form onSubmit={handleSubmit}>
-        <button type="button" onClick={handleButtonClick}>
-          Choisir un fichier
-        </button>
+        <Button
+          type="button"
+          onClick={handleButtonClick}
+          label="Choisir un fichier"
+        />
+
         <input
           type="file"
           ref={fileInputRef}
@@ -116,9 +115,11 @@ export default function MainMessage() {
           style={{ display: "none" }}
         />
         {selectedFile && (
-          <button type="button" onClick={handleSendFileToChat}>
-            Envoyer le fichier
-          </button>
+          <Button
+            type="button"
+            onClick={handleSendFileToChat}
+            label="Envoyer le fichier"
+          />
         )}
         <input
           type="text"
@@ -128,7 +129,7 @@ export default function MainMessage() {
             setCurrentMessage(event.target.value);
           }}
         />
-        <button type="submit">Envoyer</button>
+        <Button type="submit" label="Envoyer" />
       </form>
     </MainMessageStyled>
   );
@@ -138,19 +139,6 @@ const MainMessageStyled = styled.div`
   background-color: #dcedf5;
   display: flex;
   flex-direction: column;
-
-  .profil {
-    display: flex;
-    padding: 10px;
-    justify-content: center;
-
-    h2 {
-      font-weight: 400;
-    }
-    span {
-      text-decoration: underline;
-    }
-  }
 
   form {
     margin-top: auto;
@@ -163,18 +151,6 @@ const MainMessageStyled = styled.div`
       width: 50vw;
       border-radius: 25px;
       border: none;
-    }
-    button {
-      padding: 15px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 25px;
-
-      &:hover {
-        background: #0069d9;
-        cursor: pointer;
-      }
     }
   }
 
