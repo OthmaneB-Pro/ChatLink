@@ -28,43 +28,53 @@ export default function LoginPage() {
     navigate("/messaging");
   };
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
-      <input {...register("username")} placeholder="nom" />
-      {errors.username && <p>{errors.username.message}</p>}
-      <input {...register("email")} placeholder="email" />
-      {errors.email && <p>{errors.email.message}</p>}
-      <input
-        {...register("password")}
-        type="password"
-        placeholder="mot de passe"
-      />
-      {errors.password && <p>{errors.password.message}</p>}
-      {!isLogin && (
-        <>
-          <input
-            {...register("verifyPassword")}
-            placeholder="verifier le mot de passe"
-            type="password"
-          />
-          {errors.verifyPassword && <p>{errors.verifyPassword.message}</p>}
-        </>
-      )}
-      <button type="submit">{isLogin ? "Se connecter" : "S'inscrire"}</button>
-      {!isLogin && (
-        <span className="link">
-          Vous avez déjà un compte ?{" "}
-          <button onClick={() => setIsLogin(true)}>Se connecter</button>
-        </span>
-      )}
-    </StyledForm>
+    <LoginStyled>
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
+        <input {...register("username")} placeholder="nom" />
+        {errors.username && <p>{errors.username.message}</p>}
+        <input {...register("email")} placeholder="email" />
+        {errors.email && <p>{errors.email.message}</p>}
+        <input
+          {...register("password")}
+          type="password"
+          placeholder="mot de passe"
+        />
+        {errors.password && <p>{errors.password.message}</p>}
+        {!isLogin && (
+          <>
+            <input
+              {...register("verifyPassword")}
+              placeholder="verifier le mot de passe"
+              type="password"
+            />
+            {errors.verifyPassword && <p>{errors.verifyPassword.message}</p>}
+          </>
+        )}
+        <button type="submit">{isLogin ? "Se connecter" : "S'inscrire"}</button>
+        {!isLogin && (
+          <span className="link">
+            Vous avez déjà un compte ?{" "}
+            <button onClick={() => setIsLogin(true)}>Se connecter</button>
+          </span>
+        )}
+      </StyledForm>
+    </LoginStyled>
   );
 }
+
+const LoginStyled = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #dcedf5;
+`
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  width: 400px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -72,7 +82,7 @@ const StyledForm = styled.form`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   input {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
